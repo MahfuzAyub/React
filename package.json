@@ -1,0 +1,21 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "my-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".."
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "ayub",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "react-scripts": "^4.0.3"
+  }
+}
