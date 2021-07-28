@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Product from './Product';
+import ProductHook from './Components/ProductHook'
 import ProductDetails from './ProductDetails';
 import ProductFunc from "./ProductFunc";
 import index from './image/index.jpg';
 import LoadingImage from './LoadingImage'
+
 
 class App extends Component {
 
@@ -53,7 +54,7 @@ class App extends Component {
           // <div>  <img src={index} alt='logo' /> <p>page is loading</p> </div>  */}
           
 
-        {!this.state.currentProdut && <Product hl={this.hideLoader} productList={this.state.productList} selectProduct={this.selectProduct} />}
+        {!this.state.currentProdut && <ProductHook hl={this.hideLoader} productList={this.state.productList} selectProduct={this.selectProduct} />}
 
         {this.state.currentProdut && <ProductDetails currentProdut={this.state.currentProdut} bactToList={this.bactToList} />}
       </>

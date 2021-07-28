@@ -54,13 +54,4 @@ class Product extends Component {
         );
     }
 }
-
-// const Product =(props) => {
-//     console.log(props,'-----');
-//     //render()
-//  return <div>
-//      <h1>this is  {props.name}</h1>
-//      </div>
-
-
 export default Product;
