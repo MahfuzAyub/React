@@ -52,7 +52,7 @@ class App extends Component {
       <>
         {/* {this.state.isLoading && <LoadingImage hl={this.hideLoader} />}
           // <div>  <img src={index} alt='logo' /> <p>page is loading</p> </div>  */}
-          
+
 
         {!this.state.currentProdut && <ProductHook hl={this.hideLoader} productList={this.state.productList} selectProduct={this.selectProduct} />}
 

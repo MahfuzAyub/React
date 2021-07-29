@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductHook from './ProductHook';
 import ProdDetHook from './ProdDetHook';
+import LoaderHook from "./LoaderHook";
 
 const Hooks = () => {
     const [productList, setProd] = useState([
@@ -18,31 +19,32 @@ const Hooks = () => {
         }
     ]);
     const [currentProdut, setcurrentProdut] = useState([]);
-    const [isLoaded, setisLoaded] = useState([false]);
+    const [isLoaded, setisLoaded] = useState(false);
 
     useEffect(() => {
-
+        setTimeout(() => setisLoaded(true), 200)
     }, []);
 
     const selectProduct = (data) => {
-        setcurrentProdut({ ...currentProdut, data});
-        console.log(data, "hooks:received")
-        console.log(currentProdut, "cp")
+        setcurrentProdut(data);
+        console.log(data, "hooks:received data");
     };
     const bactToList = () => {
-        setcurrentProdut([...currentProdut, null]);
+        setcurrentProdut([]);
     };
     const hideLoader = () => {
-        setisLoaded({ ...this.state, isLoading: true })
+        setTimeout(() => 
+            setisLoaded(true) , 200);
     };
+    console.log(isLoaded, "========isLoaded");
     return (
         <>
             <div>
-                {currentProdut && <ProductHook hl={hideLoader} productList={productList} selectProduct={selectProduct} />}
+                {!isLoaded && <LoaderHook />}
+                {currentProdut.length == 0 && <ProductHook  productList={productList} selectProduct={selectProduct} />}
 
-                {currentProdut && <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />}
+                {currentProdut.length != 0 && <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />}
             </div> </>
     );
-    //console.log({currentProdut}, "inside app render");
 }
 export default Hooks;
