@@ -18,32 +18,33 @@ const Hooks = () => {
             price: 100000, category: 'Computer Category',
         }
     ]);
-    const [currentProdut, setcurrentProdut] = useState([]);
+    const [currentProdut, setcurrentProdut] = useState(null);
     const [isLoaded, setisLoaded] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setisLoaded(true), 200)
+        setTimeout(() => setisLoaded(true), 500)
     }, []);
 
     const selectProduct = (data) => {
+        setisLoaded(false);
+        setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(data);
         console.log(data, "hooks:received data");
+        
     };
-    const bactToList = () => {
+    const bactToList = () => {                
+        setisLoaded(false);
+        setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut([]);
     };
-    const hideLoader = () => {
-        setTimeout(() => 
-            setisLoaded(true) , 200);
-    };
-    console.log(isLoaded, "========isLoaded");
+    //console.log(isLoaded, "========isLoaded");
     return (
         <>
             <div>
                 {!isLoaded && <LoaderHook />}
-                {currentProdut.length == 0 && <ProductHook  productList={productList} selectProduct={selectProduct} />}
+                {isLoaded && !currentProdut && <ProductHook productList={productList} selectProduct={selectProduct} />}
 
-                {currentProdut.length != 0 && <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />}
+                {isLoaded && currentProdut && <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />}
             </div> </>
     );
 }
