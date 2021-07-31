@@ -10,8 +10,8 @@ const ProdDetHook = ({ currentProdut, bactToList }) => {
         bactToList();
         history.push('/');
     }
-    console.log(location, "use loaction")
-    console.log(params, "params")
+    // console.log(location, "use loaction")
+    // console.log(params, "params")
     return (
         <><h1>Product Details</h1>
             {/* {!this.state.isLoaded && <LoadingImage />} */}
