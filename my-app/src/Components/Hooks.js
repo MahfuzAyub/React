@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProductHook from './ProductHook';
 import ProdDetHook from './ProdDetHook';
 import LoaderHook from "./LoaderHook";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const Hooks = () => {
     const [productList, setProd] = useState([
@@ -30,25 +32,41 @@ const Hooks = () => {
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(data);
         console.log(data, "hooks:received data");
-
     };
+    //const history = useHistory();
     const bactToList = () => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
-        setcurrentProdut();
+        setcurrentProdut(null);
+        //  history.push('/');
     };
-    //console.log(isLoaded, "========isLoaded");
     return (
-        <>
-            <div>
+        <BrowserRouter>
+            <>
+                <Link to='/List'>Product List</Link>
+                <Link to='/ProdDet'>Product Details</Link>
+
+                <Switch >
+                    <Route path='/List/:id'>
+                        <ProductHook productList={productList} selectProduct={selectProduct} />
+                    </Route>
+                    <Route exact path='/ProdDet'>
+                        <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />
+                    </Route>
+                    <Route exact path='*'>
+                        <p>404......Nothing found</p>
+                    </Route>
+                </Switch>
+                {/* <div>
                 {!isLoaded ? <LoaderHook /> :
                     <>
                         {!currentProdut ? (<ProductHook productList={productList} selectProduct={selectProduct} />)
                             : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}
                     </>
                 }
-            </div>
-        </>
+            </div> */}
+            </>
+        </BrowserRouter>
     );
 }
 export default Hooks;
