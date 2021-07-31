@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory, useLocation,useParams } from "react-router";
 
 
 const ProdDetHook = ({ currentProdut, bactToList }) => {

@@ -3,7 +3,7 @@ import ProductHook from './ProductHook';
 import ProdDetHook from './ProdDetHook';
 import LoaderHook from "./LoaderHook";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router";
+//import { useHistory } from "react-router";
 
 const Hooks = () => {
     const [productList, setProd] = useState([
@@ -43,11 +43,11 @@ const Hooks = () => {
     return (
         <BrowserRouter>
             <>
-                <Link to='/List'>Product List</Link>
+                <Link to='/'>Product List</Link>
                 <Link to='/ProdDet'>Product Details</Link>
 
                 <Switch >
-                    <Route path='/List/:id'>
+                    <Route path='/'>
                         <ProductHook productList={productList} selectProduct={selectProduct} />
                     </Route>
                     <Route exact path='/ProdDet'>
