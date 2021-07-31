@@ -30,12 +30,12 @@ const Hooks = () => {
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(data);
         console.log(data, "hooks:received data");
-        
+
     };
-    const bactToList = () => {                
+    const bactToList = () => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
-        setcurrentProdut([]);
+        setcurrentProdut(null);
     };
     //console.log(isLoaded, "========isLoaded");
     return (
