@@ -30,22 +30,25 @@ const Hooks = () => {
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(data);
         console.log(data, "hooks:received data");
-        
+
     };
-    const bactToList = () => {                
+    const bactToList = () => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
-        setcurrentProdut([]);
+        setcurrentProdut();
     };
     //console.log(isLoaded, "========isLoaded");
     return (
         <>
             <div>
-                {!isLoaded && <LoaderHook />}
-                {isLoaded && !currentProdut && <ProductHook productList={productList} selectProduct={selectProduct} />}
-
-                {isLoaded && currentProdut && <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />}
-            </div> </>
+                {!isLoaded ? <LoaderHook /> :
+                    <>
+                        {!currentProdut ? (<ProductHook productList={productList} selectProduct={selectProduct} />)
+                            : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}
+                    </>
+                }
+            </div>
+        </>
     );
 }
 export default Hooks;
