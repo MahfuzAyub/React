@@ -6,15 +6,15 @@ import LoaderHook from "./LoaderHook";
 const Hooks = () => {
     const [productList, setProd] = useState([
         {
-            name: 'Mobile', description: 'Mobile Description',
+            name: 'Rocket', description: 'Mobile Description',
             price: 50000, category: 'smart Phone',
         },
         {
-            name: 'Freezer', description: 'Freezer Description',
+            name: 'Rocket', description: 'Freezer Description',
             price: 20000, category: 'Freezer Category',
         },
         {
-            name: 'Computer', description: 'Computer Description',
+            name: 'Rocket', description: 'Computer Description',
             price: 100000, category: 'Computer Category',
         }
     ]);
