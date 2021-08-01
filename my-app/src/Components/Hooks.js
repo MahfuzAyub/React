@@ -3,7 +3,7 @@ import ProductHook from './ProductHook';
 import ProdDetHook from './ProdDetHook';
 import LoaderHook from "./LoaderHook";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-//import { useHistory } from "react-router";
+import { Redirect, useHistory, useLocation, useParams } from "react-router";
 
 const Hooks = () => {
     const [productList, setProd] = useState([
@@ -39,18 +39,21 @@ const Hooks = () => {
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(null);
         //  history.push('/');
-    };
-    return (
-        <BrowserRouter>
+    };    
+    return (        
             <>
                 <Link to='/'>Product List</Link>
-                <Link to='/ProdDet'>Product Details</Link>
+                <Link to='/Details'>Product Details</Link>
 
                 <Switch >
-                    <Route path='/'>
+                    <Route exact path='/'>
                         <ProductHook productList={productList} selectProduct={selectProduct} />
                     </Route>
-                    <Route exact path='/ProdDet'>
+                    <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route>
+                    <Route path='/List/:id'>
+                        <ProductHook productList={productList} selectProduct={selectProduct} />
+                    </Route>
+                    <Route exact path='/Details'>
                         <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />
                     </Route>
                     <Route exact path='*'>
@@ -64,9 +67,8 @@ const Hooks = () => {
                             : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}
                     </>
                 }
-            </div> */}
-            </>
-        </BrowserRouter>
+                </div> */}
+            </>    
     );
 }
 export default Hooks;

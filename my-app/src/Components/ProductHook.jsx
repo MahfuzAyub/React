@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-const ProductHook=({productList,selectProduct})=>{
-   //   console.log(selectProduct)
+import { useHistory, useLocation, useParams } from "react-router";
+const ProductHook = ({ productList, selectProduct }) => {
+    //   console.log(selectProduct)
     //   const [prod,setProd]=useState({namee: 'Computer', description: 'Computer Description',
     //         price: 100000, category: 'Computer Category'});
     //   const addProd=()=>{
@@ -11,25 +11,35 @@ const ProductHook=({productList,selectProduct})=>{
     //   const addProd=()=>{
     //       selectProduct(p);
     //   }
-return (    
-            <>            
-                {/* {!this.state.isLoaded && <LoadingImage />} */}
-                <h1>Product List</h1>
-                {//this.state.isLoaded&&
-                    productList.map(p => {
-                       console.log(p,"type")
-                        return (
-                            <div style={{ marginBottom: '10px', border: '1px solid green', }}
-                                onClick={() => selectProduct((p))}
-                            >                                
-                                <p>Name  : {p.name} </p>
-                                {/* <p>Category : {p.category} </p>
+    const params = useParams();
+
+    const history = useHistory();
+    console.log(params, "========params old==========");
+    const getDetials = (p,index) => {
+        console.log(index, "========index==========");
+        history.push('/List/'+index);
+    }
+    
+    return (
+        <>
+            {/* <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route> */}
+            <h1>Product List</h1>
+            {//this.state.isLoaded&&
+                productList.map((p, index) => {
+                  //  console.log(p, "type")
+                    return (
+                        <div style={{ marginBottom: '10px', border: '1px solid green', }}
+                            onClick={() => getDetials(p,index)}>
+                            {params.id = index}
+                            <p>Name  : {p.name} </p>
+                            {/* <p>Category : {p.category} </p>
                                 <p>Description  :{p.description} </p> */}
-                                <p>Price : {p.price} </p>
-                            </div>
-                        );
-                    })
-                } 
-            </>
-        )};
-export default  ProductHook;
+                            <p>Price : {p.price} </p>
+                        </div>
+                    );
+                })
+            }
+        </>
+    )
+};
+export default ProductHook;
