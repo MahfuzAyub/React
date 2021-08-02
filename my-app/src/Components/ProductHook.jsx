@@ -15,9 +15,12 @@ const ProductHook = ({ productList, selectProduct }) => {
 
     const history = useHistory();
     console.log(params, "========params old==========");
-    const getDetials = (p,index) => {
+    const getDetials = (index) => {
         console.log(index, "========index==========");
-        history.push('/List/'+index);
+        var url = '/Details/:' + index;
+        history.push(url);
+        selectProduct(index);
+        console.log(url, "========url==========");
     }
     
     return (
@@ -25,11 +28,11 @@ const ProductHook = ({ productList, selectProduct }) => {
             {/* <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route> */}
             <h1>Product List</h1>
             {//this.state.isLoaded&&
-                productList.map((p, index) => {
+                productList?.map((p, index) => {
                   //  console.log(p, "type")
                     return (
                         <div style={{ marginBottom: '10px', border: '1px solid green', }}
-                            onClick={() => getDetials(p,index)}>
+                            onClick={() => getDetials(index)}>
                             {params.id = index}
                             <p>Name  : {p.name} </p>
                             {/* <p>Category : {p.category} </p>

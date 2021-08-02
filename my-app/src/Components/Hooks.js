@@ -8,67 +8,78 @@ import { Redirect, useHistory, useLocation, useParams } from "react-router";
 const Hooks = () => {
     const [productList, setProd] = useState([
         {
-            name: 'Rocket', description: 'Mobile Description',
+            id: 0, name: 'Mobile', description: 'Mobile Description',
             price: 50000, category: 'smart Phone',
         },
         {
-            name: 'Rocket', description: 'Freezer Description',
+            id: 1, name: 'Refrigertor', description: 'Freezer Description',
             price: 20000, category: 'Freezer Category',
         },
         {
-            name: 'Rocket', description: 'Computer Description',
+            id: 2, name: 'Computer', description: 'Computer Description',
             price: 100000, category: 'Computer Category',
+        }
+    ]);
+    const [productList1, setProd1] = useState([
+        {
+            id: 0, description: 'Mobile Description',
+            price: 50000, category: 'smart Phone',
+        },
+        {
+            id: 1, description: 'Mobile Description',
+            price: 50000, category: 'smart Phone',
         }
     ]);
     const [currentProdut, setcurrentProdut] = useState(null);
     const [isLoaded, setisLoaded] = useState(false);
+    const [p1, setp1] = useState(null);
+    //var p1 = null;
 
     useEffect(() => {
-        setTimeout(() => setisLoaded(true), 500)
+        //setTimeout(() => setisLoaded(true), 500)
+        selectProduct();
+
     }, []);
 
-    const selectProduct = (data) => {
+    const selectProduct = (index) => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
-        setcurrentProdut(data);
-        console.log(data, "hooks:received data");
+        // const p1 =
+        var p2 = productList.filter(p => p.id === index);
+        //     map((description, price, category) => {
+        //     return { description, price, category }
+        // }).
+        //p1=   Object.assign({}, ...p2);
+        setcurrentProdut(p2);
+        console.log(p1, "current prod in hooks");
+
     };
-    //const history = useHistory();
     const bactToList = () => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(null);
         //  history.push('/');
-    };    
-    return (        
-            <>
-                <Link to='/'>Product List</Link>
-                <Link to='/Details'>Product Details</Link>
-
-                <Switch >
-                    <Route exact path='/'>
-                        <ProductHook productList={productList} selectProduct={selectProduct} />
-                    </Route>
-                    <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route>
-                    <Route path='/List/:id'>
-                        <ProductHook productList={productList} selectProduct={selectProduct} />
-                    </Route>
-                    <Route exact path='/Details'>
-                        <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />
-                    </Route>
-                    <Route exact path='*'>
-                        <p>404......Nothing found</p>
-                    </Route>
-                </Switch>
-                {/* <div>
-                {!isLoaded ? <LoaderHook /> :
-                    <>
-                        {!currentProdut ? (<ProductHook productList={productList} selectProduct={selectProduct} />)
-                            : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}
-                    </>
-                }
-                </div> */}
-            </>    
+    };
+    return (
+        <>
+            <Link to='/'>Product List</Link>
+            <Link to='/Details'>Product Details</Link>
+            <Switch >
+                <Route exact path='/'>
+                    <ProductHook productList={productList} selectProduct={selectProduct} />
+                </Route>
+                <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route>
+                <Route path='/Details/:id'>
+                    <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />
+                </Route>
+                <Route exact path='/Details'>
+                    <ProdDetHook currentProdut={productList} bactToList={bactToList} />
+                </Route>
+                <Route exact path='*'>
+                    <p>404......Nothing found</p>
+                </Route>
+            </Switch>
+        </>
     );
 }
 export default Hooks;
