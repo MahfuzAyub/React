@@ -15,10 +15,10 @@ const ProdDetHook = ({ currentProdut, bactToList }) => {
             <h1>Product Details</h1>
             {
                 <div>
-                    <p>Name  : {currentProdut[0]?.name} </p>
-                    <p>Category : {currentProdut[0]?.category} </p>
-                    <p>Description  :{currentProdut[0]?.description} </p>
-                    <p>Price : {currentProdut[0]?.price} </p>
+                    <p>Name  : {currentProdut?.name} </p>
+                    <p>Category : {currentProdut?.category} </p>
+                    <p>Description  :{currentProdut?.description} </p>
+                    <p>Price : {currentProdut?.price} </p>
                     <button onClick={() => back()}>Back to List</button>
                 </div>
             }

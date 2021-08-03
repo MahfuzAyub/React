@@ -14,13 +14,14 @@ const ProductHook = ({ productList, selectProduct }) => {
     const params = useParams();
 
     const history = useHistory();
-    console.log(params, "========params old==========");
+    //console.log(params, "========params old==========");
     const getDetials = (index) => {
         console.log(index, "========index==========");
-        var url = '/Details/:' + index;
-        history.push(url);
-        selectProduct(index);
+        var url = `/Details/${index}`;
+        history.push(`/Details/${index}`);
         console.log(url, "========url==========");
+        selectProduct(index);
+
     }
 
     return (
@@ -32,7 +33,7 @@ const ProductHook = ({ productList, selectProduct }) => {
                     //  console.log(p, "type")
                     return (
                         <div style={{ marginBottom: '10px', border: '1px solid green', }}
-                            onClick={() => getDetials(index)}>
+                            onClick={() => getDetials(p.id)}>
                             {params.id = index}
                             <p>Name  : {p.name} </p>
                             {/* <p>Category : {p.category} </p>
