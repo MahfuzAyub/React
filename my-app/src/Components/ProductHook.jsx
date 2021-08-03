@@ -22,14 +22,14 @@ const ProductHook = ({ productList, selectProduct }) => {
         selectProduct(index);
         console.log(url, "========url==========");
     }
-    
+
     return (
         <>
             {/* <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route> */}
             <h1>Product List</h1>
             {//this.state.isLoaded&&
                 productList?.map((p, index) => {
-                  //  console.log(p, "type")
+                    //  console.log(p, "type")
                     return (
                         <div style={{ marginBottom: '10px', border: '1px solid green', }}
                             onClick={() => getDetials(index)}>
