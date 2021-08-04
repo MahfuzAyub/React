@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductHook from './ProductHook';
 import ProdDetHook from './ProdDetHook';
-import LoaderHook from "./LoaderHook";
+import Loader from "./Loader";
 import { BrowserRouter, Switch, Route, Link, useParams } from "react-router-dom";
 import { Redirect, useHistory, useLocation } from "react-router";
 
@@ -35,52 +35,41 @@ const Hooks = () => {
     const [p1, setp1] = useState(null);
     const { params } = useParams();
     // const idd = params.id;
-    console.log(params, "id in hookssss");
-    //var p1 = null;
 
     useEffect(() => {
-        //setTimeout(() => setisLoaded(true), 500)
-        selectProduct();
-
-    }, []);
+        setTimeout(() => setisLoaded(true), 500)}, []);
 
     const selectProduct = (params) => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
-        // const p1 =
         var p2 = productList.filter(p => p.id === params);
-        console.log({ params }, "*********selectProduct");
         //     map((description, price, category) => {
-        //     return { description, price, category }
-        // }).
-        //p1=   Object.assign({}, ...p2);
+        //     return { description, price, category } });
         setcurrentProdut(Object.assign({}, ...p2));
-        console.log(p1, "current prod in hooks");
     };
     const bactToList = () => {
         setisLoaded(false);
         setTimeout(() => setisLoaded(true), 500);
         setcurrentProdut(null);
     };
-
-    // console.log(id.id, "id in hooks");
+    console.log({ isLoaded }, "*********isLoaded");
     return (
-        <>
+        <>            
             <Link to='/'>Product List</Link>
             <Link to='/Details'>Product Details</Link>
             <Switch >
                 <Route exact path='/'>
-                    <ProductHook productList={productList} selectProduct={selectProduct} />
+                    {!isLoaded ? (<Loader />) :(<ProductHook productList={productList} selectProduct={selectProduct} />)}
                 </Route>
                 <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route>
                 <Route path='/Details/:id'>
-                    <ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />
+                    {!isLoaded ? (<Loader />) : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}                    
                 </Route>
-                <Route exact path='/Details'>d
+                <Route exact path='/Details'>
                     <ProdDetHook currentProdut={null} bactToList={bactToList} />
                 </Route>
                 <Route exact path='*'>
-                    <p>404......Nothing found</p>
+                    <p>404......Nothing found !!!</p>
                 </Route>
             </Switch>
         </>
