@@ -35,7 +35,7 @@ const ProductHook = ({ productList, selectProduct }) => {
                             {/* <p>Category : {p.category} </p>
                                 <p>Description  :{p.description} </p> */}
                             <p>Price : {p.price} </p>
-                        </div>
+                            </div>
                     );
                 })
             }

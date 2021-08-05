@@ -37,7 +37,8 @@ const Hooks = () => {
     // const idd = params.id;
 
     useEffect(() => {
-        setTimeout(() => setisLoaded(true), 500)}, []);
+        setTimeout(() => setisLoaded(true), 500)
+    }, []);
 
     const selectProduct = (params) => {
         setisLoaded(false);
@@ -54,16 +55,16 @@ const Hooks = () => {
     };
     console.log({ isLoaded }, "*********isLoaded");
     return (
-        <>            
+        <>
             <Link to='/'>Product List</Link>
             <Link to='/Details'>Product Details</Link>
             <Switch >
                 <Route exact path='/'>
-                    {!isLoaded ? (<Loader />) :(<ProductHook productList={productList} selectProduct={selectProduct} />)}
+                    {!isLoaded ? (<Loader />) : (<ProductHook productList={productList} selectProduct={selectProduct} />)}
                 </Route>
                 <Route exact path='/List' render={() => <Redirect to='/'></Redirect>}></Route>
                 <Route path='/Details/:id'>
-                    {!isLoaded ? (<Loader />) : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}                    
+                    {!isLoaded ? (<Loader />) : (<ProdDetHook currentProdut={currentProdut} bactToList={bactToList} />)}
                 </Route>
                 <Route exact path='/Details'>
                     <ProdDetHook currentProdut={null} bactToList={bactToList} />
