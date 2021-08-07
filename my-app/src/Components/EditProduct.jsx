@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 const EditProduct = () => {
-	const [product, setProdDetails] = useState();
-	
+	const [product, setProudct] = useState();
+
 	const editProduct = (e, key) => {
-		setProdDetails({ ...product, [key]: e.target.value });
+		setProudct(product && { ...product, [key]: e.target.value });
+		console.log(e.target.value, "target");
 	};
 	const { id } = useParams();
 	const callUpdateApi = () => {
@@ -29,26 +30,43 @@ const EditProduct = () => {
 		axios
 			.get(`https://fakestoreapi.com/products/${id}`)
 			.then((res) => {
-				setProdDetails(res.data);
+				setProudct(res.data);
+				console.log(res.data);
+				console.log(product);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, []);
-	console.log(product, 'dfdfdfdf');
+
 	return (
 		<>
 			<div>
 				<p>Nameeeee</p>
-				<input   onChange={(e) => editProduct(e, "name")} />
+				<input
+					value={product?.title}
+					onChange={(e) => editProduct(e, "title")}
+				/>
 				<p>Description</p>
-				<input onChange={(e) => editProduct(e, "description")} />
+				<input
+					value={product?.description}
+					onChange={(e) => editProduct(e, "description")}
+				/>
 				<p>Price</p>
-				<input onChange={(e) => editProduct(e, "price")} />
+				<input
+					value={product?.price}
+					onChange={(e) => editProduct(e, "price")}
+				/>
 				<p>Category</p>
-				<input onChange={(e) => editProduct(e, "category")} />
+				<input
+					value={product?.category}
+					onChange={(e) => editProduct(e, "category")}
+				/>
 				<p>Image</p>
-				<input onChange={(e) => editProduct(e, "image")} />
+				<input
+					value={product?.image}
+					onChange={(e) => editProduct(e, "image")}
+				/>
 				<div>
 					<button onClick={callUpdateApi}>Update</button>
 				</div>

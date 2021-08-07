@@ -36,14 +36,14 @@ const ProdDetails = () => {
 			<h1>Product Details</h1>
 			{
 				<div>
-					<img src={ProdDetails?.image} style={{ height: "20%" }}></img>
+					<img src={ProdDetails?.image} style={{ width: "25% " }}></img>
 					<p>Name : {ProdDetails?.title} </p>
 					<p>Category : {ProdDetails?.category} </p>
 					<p>Description :{ProdDetails?.description} </p>
 					<p>Price : {ProdDetails?.price} </p>
 					<button onClick={() => bactToList()}>Back to List</button>
 					<div>
-						<button onClick={() => goEditPage(ProdDetails.id) }>Edit</button>
+						<button onClick={() => goEditPage(ProdDetails.id)}>Edit</button>
 					</div>
 				</div>
 			}
