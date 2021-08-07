@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProductHook from './Components/ProductHook'
+import ProductHook from './Components/ProductList'
 import ProductDetails from './ProductDetails';
 import ProductFunc from "./ProductFunc";
 import index from './image/index.jpg';
