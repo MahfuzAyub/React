@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 const EditProduct = () => {
 	const [product, setProudct] = useState();
-
 	const editProduct = (e, key) => {
 		setProudct(product && { ...product, [key]: e.target.value });
 		console.log(e.target.value, "target");
 	};
 	const { id } = useParams();
+	const history = useHistory();
 	const callUpdateApi = () => {
 		axios
 			.put(`https://fakestoreapi.com/products/${id}`, {
@@ -19,10 +19,11 @@ const EditProduct = () => {
 				image: product.image,
 			})
 			.then((response) => {
-				console.log(response, "-------respoonse edit");
+				alert(response.status, "-------respoonse Status");
+				history.push("/");
 			})
 			.catch((error) => {
-				console.log(error, "-------error edit");
+				alert(error, "-------error Status");
 			});
 	};
 	useEffect(() => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { useHistory, useLocation, useParams } from "react-router";
 const AddProduct = () => {
 	const [product, setProduct] = useState({
 		name: "",
@@ -9,6 +9,7 @@ const AddProduct = () => {
 		category: "",
 		image: "",
 	});
+	const history = useHistory();
 	const AddProduct = (e, key) => {
 		setProduct({ ...product, [key]: e.target.value });
 	};
@@ -23,6 +24,7 @@ const AddProduct = () => {
 			})
 			.then((response) => {
 				console.log(response, "-------respoonse");
+				history.push("/");
 			})
 			.catch((error) => {
 				console.log(error, "-------error");
