@@ -23,11 +23,9 @@ const AddProduct = () => {
 				image: product.image,
 			})
 			.then((response) => {
-				console.log(response, "-------respoonse");
 				history.push("/");
 			})
 			.catch((error) => {
-				console.log(error, "-------error");
 			});
 	};
 	return (

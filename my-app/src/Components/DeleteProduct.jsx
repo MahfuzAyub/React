@@ -22,13 +22,13 @@ const DeleteProduct = () => {
 			});
 	};
 	useEffect(() => {
-		//setTimeout(() => setisLoaded(true), 500)
 	}, []);
 
 	return (
 		<>
 			<div>
 				<h1>Sure to Delete The Product ??</h1>
+
 				<div>
 					<button onClick={callDeleteApi}>Delete</button>
 				</div>

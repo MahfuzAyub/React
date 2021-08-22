@@ -19,15 +19,12 @@ const EditProduct = () => {
 				image: product.image,
 			})
 			.then((response) => {
-				alert(response.status, "-------respoonse Status");
 				history.push("/");
 			})
 			.catch((error) => {
-				alert(error, "-------error Status");
 			});
 	};
 	useEffect(() => {
-		//setTimeout(() => setisLoaded(true), 500)
 		axios
 			.get(`https://fakestoreapi.com/products/${id}`)
 			.then((res) => {
@@ -43,7 +40,7 @@ const EditProduct = () => {
 	return (
 		<>
 			<div>
-				<p>Nameeeee</p>
+				<p>Name</p>
 				<input
 					value={product?.title}
 					onChange={(e) => editProduct(e, "title")}

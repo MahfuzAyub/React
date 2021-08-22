@@ -10,7 +10,13 @@ import { Redirect, useHistory, useLocation } from "react-router";
 import axios from "axios";
 import EditProduct from "./EditProduct";
 import Loader from "./Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentProduct_Store } from "../store/action";
+
 const ProdDetails = () => {
+	const reduxStore = useSelector((store) => store);
+	const dispatch = useDispatch();
+
 	const [ProdDetails, setProdDetails] = useState();
 	const { id } = useParams();
 	const histor = useHistory();
@@ -19,11 +25,10 @@ const ProdDetails = () => {
 	};
 	const [isLoaded, setIsLoaded] = useState(false);
 	useEffect(() => {
-		//setTimeout(() => setisLoaded(true), 500)
 		axios
 			.get(`https://fakestoreapi.com/products/${id}`)
 			.then((res) => {
-				setProdDetails(res.data);
+				dispatch(setCurrentProduct_Store(res.data));
 				setIsLoaded(true);
 			})
 			.catch((error) => {
@@ -43,11 +48,13 @@ const ProdDetails = () => {
 			{
 				<div>
 					<div>{!isLoaded && <Loader />}</div>
-					<img src={ProdDetails?.image} style={{ width: "25% " }}></img>
-					<p>Name : {ProdDetails?.title} </p>
-					<p>Category : {ProdDetails?.category} </p>
-					<p>Description :{ProdDetails?.description} </p>
-					<p>Price : {ProdDetails?.price} </p>
+					<img
+						src={reduxStore.currentProduct?.image}
+						style={{ width: "25% " }}></img>
+					<p>Name : {reduxStore.currentProduct?.title} </p>
+					<p>Category : {reduxStore.currentProduct?.category} </p>
+					<p>Description :{reduxStore.currentProduct?.description} </p>
+					<p>Price : {reduxStore.currentProduct?.price} </p>
 					<button onClick={() => bactToList()}>Back to List</button>
 					<div>
 						<button onClick={() => goEditPage(ProdDetails.id)}>Edit</button>
