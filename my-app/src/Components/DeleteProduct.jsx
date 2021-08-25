@@ -17,6 +17,7 @@ const DeleteProduct = () => {
 	
 	const callDeleteApi = () => {
 		dispatch(requestProductDelete(id));
+		history.push("/");
 	};
 	useEffect(() => {
 	}, []);

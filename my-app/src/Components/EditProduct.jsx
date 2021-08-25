@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const EditProduct = () => {
 	const [product, setProudct] = useState();
-	const editProduct = (e, key) => {
+	const editProd = (e, key) => {
 		setProudct(product && { ...product, [key]: e.target.value });
 		console.log(e.target.value, "target");
 	};
@@ -17,42 +17,38 @@ const EditProduct = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const reduxStore = useSelector((store) => store.detailStore);
+	const curProductStore = useSelector(
+		(store) => store.detailStore.currentProduct
+	);
 	const callUpdateApi = (id) => {
 		dispatch(requestProductEdit(id));
+		history.push("/");
 	};
 	useEffect(() => {
 		dispatch(requestProductDetails(id));
+		setProudct(curProductStore);
+		console.log(product, "cpp");
 	}, [dispatch]);
 
 	return (
 		<>
 			<div>
 				<p>Name</p>
-				<input
-					value={reduxStore.currentProduct?.title}
-					onChange={(e) => editProduct(e, "title")}
-				/>
+				<input value={product?.title} onChange={(e) => editProd(e, "title")} />
 				<p>Description</p>
 				<input
-					value={reduxStore.currentProduct?.description}
-					onChange={(e) => editProduct(e, "description")}
+					value={product?.description}
+					onChange={(e) => editProd(e, "description")}
 				/>
 				<p>Price</p>
-				<input
-					value={reduxStore.currentProduct?.price}
-					onChange={(e) => editProduct(e, "price")}
-				/>
+				<input value={product?.price} onChange={(e) => editProd(e, "price")} />
 				<p>Category</p>
 				<input
-					value={reduxStore.currentProduct?.category}
-					onChange={(e) => editProduct(e, "category")}
+					value={product?.category}
+					onChange={(e) => editProd(e, "category")}
 				/>
 				<p>Image</p>
-				<input
-					value={reduxStore.currentProduct?.image}
-					onChange={(e) => editProduct(e, "image")}
-				/>
+				<input value={product?.image} onChange={(e) => editProd(e, "image")} />
 				<div>
 					<button onClick={callUpdateApi}>Update</button>
 				</div>

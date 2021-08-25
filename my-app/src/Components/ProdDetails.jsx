@@ -17,7 +17,6 @@ const ProdDetails = () => {
 	const reduxStore = useSelector((store) => store.detailStore);
 	const dispatch = useDispatch();
 
-	const [ProdDetails, setProdDetails] = useState();
 	const { id } = useParams();
 	const histor = useHistory();
 	const bactToList = () => {
