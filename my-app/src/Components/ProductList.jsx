@@ -2,24 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import axios from "axios";
 import Loader from "./Loader";
-import { setProductList_Store } from "../store/action";
+import { requestProductList } from "../store/action/productListAction";
 import { useDispatch, useSelector } from "react-redux";
 const ProductList = () => {
-	const reduxStore = useSelector((store) => store);
+	const listStore = useSelector((store) => store.listStore);
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const params = useParams();
 	const history = useHistory();
 
 	useEffect(() => {
-		axios
-			.get("https://fakestoreapi.com/products")
-			.then((res) => {
-				dispatch(setProductList_Store(res.data));
-				setIsLoaded(true);
-			})
-			.catch((error) => {});
-	}, []);
+		dispatch(requestProductList());
+		setIsLoaded(true);
+	}, [dispatch]);
+
 	const getDetials = (id) => {
 		history.push(`/Details/${id}`);
 	};
@@ -28,7 +24,7 @@ const ProductList = () => {
 			<h1>Product List</h1>
 			<div>
 				<div>{!isLoaded && <Loader />}</div>
-				{reduxStore.productList.map((p) => {
+				{listStore.productList.map((p) => {
 					return (
 						<div>
 							<img src={p.image} style={{ width: "70px" }}></img>
@@ -41,4 +37,4 @@ const ProductList = () => {
 		</>
 	);
 };
-export default ProductList; 
+export default ProductList;

@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
+import {
+	requestProductDetails,
+	requestProductEdit,
+} from "../store/action/prodDetailAction";
+import { useDispatch, useSelector } from "react-redux";
+
 const EditProduct = () => {
 	const [product, setProudct] = useState();
 	const editProduct = (e, key) => {
@@ -9,60 +15,42 @@ const EditProduct = () => {
 	};
 	const { id } = useParams();
 	const history = useHistory();
-	const callUpdateApi = () => {
-		axios
-			.put(`https://fakestoreapi.com/products/${id}`, {
-				name: product.name,
-				description: product.description,
-				price: product.price,
-				category: product.category,
-				image: product.image,
-			})
-			.then((response) => {
-				history.push("/");
-			})
-			.catch((error) => {
-			});
+	const dispatch = useDispatch();
+
+	const reduxStore = useSelector((store) => store.detailStore);
+	const callUpdateApi = (id) => {
+		dispatch(requestProductEdit(id));
 	};
 	useEffect(() => {
-		axios
-			.get(`https://fakestoreapi.com/products/${id}`)
-			.then((res) => {
-				setProudct(res.data);
-				console.log(res.data);
-				console.log(product);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+		dispatch(requestProductDetails(id));
+	}, [dispatch]);
 
 	return (
 		<>
 			<div>
 				<p>Name</p>
 				<input
-					value={product?.title}
+					value={reduxStore.currentProduct?.title}
 					onChange={(e) => editProduct(e, "title")}
 				/>
 				<p>Description</p>
 				<input
-					value={product?.description}
+					value={reduxStore.currentProduct?.description}
 					onChange={(e) => editProduct(e, "description")}
 				/>
 				<p>Price</p>
 				<input
-					value={product?.price}
+					value={reduxStore.currentProduct?.price}
 					onChange={(e) => editProduct(e, "price")}
 				/>
 				<p>Category</p>
 				<input
-					value={product?.category}
+					value={reduxStore.currentProduct?.category}
 					onChange={(e) => editProduct(e, "category")}
 				/>
 				<p>Image</p>
 				<input
-					value={product?.image}
+					value={reduxStore.currentProduct?.image}
 					onChange={(e) => editProduct(e, "image")}
 				/>
 				<div>

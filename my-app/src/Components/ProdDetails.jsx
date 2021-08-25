@@ -11,10 +11,10 @@ import axios from "axios";
 import EditProduct from "./EditProduct";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentProduct_Store } from "../store/action";
+import { requestProductDetails } from "../store/action/prodDetailAction";
 
 const ProdDetails = () => {
-	const reduxStore = useSelector((store) => store);
+	const reduxStore = useSelector((store) => store.detailStore);
 	const dispatch = useDispatch();
 
 	const [ProdDetails, setProdDetails] = useState();
@@ -25,16 +25,10 @@ const ProdDetails = () => {
 	};
 	const [isLoaded, setIsLoaded] = useState(false);
 	useEffect(() => {
-		axios
-			.get(`https://fakestoreapi.com/products/${id}`)
-			.then((res) => {
-				dispatch(setCurrentProduct_Store(res.data));
-				setIsLoaded(true);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		dispatch(requestProductDetails(id));
+		setIsLoaded(true);
 	}, []);
+
 	const goEditPage = (id) => {
 		histor.push(`/Edit/${id}`);
 	};
@@ -57,10 +51,12 @@ const ProdDetails = () => {
 					<p>Price : {reduxStore.currentProduct?.price} </p>
 					<button onClick={() => bactToList()}>Back to List</button>
 					<div>
-						<button onClick={() => goEditPage(ProdDetails.id)}>Edit</button>
+						<button onClick={() => goEditPage(reduxStore.currentProduct?.id)}>
+							Edit
+						</button>
 					</div>
 					<div>
-						<button onClick={() => goDeletePage(ProdDetails.id)}>
+						<button onClick={() => goDeletePage(reduxStore.currentProduct?.id)}>
 							Delete Product
 						</button>
 					</div>

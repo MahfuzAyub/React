@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
+import { requestProductDelete } from "../store/action/prodDetailAction";
+import { useDispatch, useSelector } from "react-redux";
+
 const DeleteProduct = () => {
 	const [product, setProudct] = useState();
 
@@ -10,16 +13,10 @@ const DeleteProduct = () => {
 	};
 	const { id } = useParams();
 	const history = useHistory();
+	const dispatch = useDispatch();
+	
 	const callDeleteApi = () => {
-		axios
-			.put(`https://fakestoreapi.com/products/${id}`)
-			.then((response) => {
-				alert(response.status, "-------respoonse Status");
-				history.push("/");
-			})
-			.catch((error) => {
-				alert(error, "-------error Status");
-			});
+		dispatch(requestProductDelete(id));
 	};
 	useEffect(() => {
 	}, []);
